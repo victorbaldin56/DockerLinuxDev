@@ -28,5 +28,5 @@ jobs:
         file: ./Dockerfile
         push: ${{ github.ref == 'refs/heads/master' }}
         tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/bitonic_sort:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/bitonic_sort:${{ github.sha }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/linux_dev:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/linux_dev:${{ github.sha }}
