@@ -16,7 +16,7 @@ RUN apt-get update && \
         zsh \
         lldb \
         valgrind \
-        pkgconfig \
+        pkg-config \
         mesa-utils libgl1-mesa-glx && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
