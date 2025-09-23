@@ -23,7 +23,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m venv .venv && \
+RUN python3 -m venv .venv && zsh && \
     sh .venv/bin/activate && \
     pip install --no-cache-dir conan
 
