@@ -2,6 +2,9 @@ FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get update && apt-get install -y zsh
+
+SHELL ["/bin/zsh", "-c"]
 RUN apt-get update && \
     apt-get install -y \
         pocl-opencl-icd \
@@ -14,7 +17,6 @@ RUN apt-get update && \
         cmake \
         git \
         python3-full \
-        zsh \
         lldb \
         valgrind \
         pkg-config \
@@ -23,11 +25,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m venv .venv && zsh && \
+RUN python3 -m venv .venv && \
     source .venv/bin/activate && \
     pip install --no-cache-dir conan
 
 WORKDIR /app
 COPY . .
-CMD zsh && \
-    source .venv/bin/activate
+CMD zsh
