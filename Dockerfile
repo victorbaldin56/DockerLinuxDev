@@ -29,4 +29,5 @@ RUN python3 -m venv .venv && zsh && \
 
 WORKDIR /app
 COPY . .
-CMD zsh
+CMD zsh && \
+    source .venv/bin/activate
