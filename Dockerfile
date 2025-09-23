@@ -13,6 +13,7 @@ RUN apt-get update && \
         python3-venv \
         cmake \
         git \
+        python3-full \
         zsh \
         lldb \
         valgrind \
