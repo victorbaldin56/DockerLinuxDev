@@ -17,7 +17,8 @@ RUN apt-get update && \
         lldb \
         valgrind \
         pkg-config \
-        mesa-utils libgl1-mesa-glx && \
+        mesa-utils libgl1-mesa-glx \
+        gcc-riscv64-unknown-elf && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
