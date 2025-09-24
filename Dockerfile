@@ -15,9 +15,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-SHELL ["/bin/zsh", "-c"]
 RUN python3 -m venv .venv && \
-    source .venv/bin/activate && \
+    chmod +x ./venv/bin/activate && ./venv/bin/activate && \
     pip install --no-cache-dir conan
 
 WORKDIR /app
