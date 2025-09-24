@@ -5,8 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y zsh
 
 SHELL ["/bin/zsh", "-c"]
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get install -y \
         pocl-opencl-icd \
         ocl-icd-opencl-dev \
         clinfo \
