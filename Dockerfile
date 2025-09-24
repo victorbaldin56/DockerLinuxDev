@@ -19,7 +19,6 @@ RUN apt-get install -y \
         lldb \
         valgrind \
         pkg-config \
-        mesa-utils \
         gcc-riscv64-unknown-elf && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
