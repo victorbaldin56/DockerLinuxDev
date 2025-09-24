@@ -8,7 +8,8 @@ RUN apt-get update && \
         clang \
         cmake \
         git \
-        python3-full \
+        python3 \
+        python3-virtualenv \
         python3-pip \
         lldb \
         valgrind \
