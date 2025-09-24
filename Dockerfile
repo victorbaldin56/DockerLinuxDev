@@ -8,6 +8,7 @@ RUN apt-get update && \
         cmake \
         git \
         python3-full \
+        python3-pip \
         lldb \
         valgrind \
         pkg-config \
