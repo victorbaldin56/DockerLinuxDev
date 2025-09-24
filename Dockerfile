@@ -2,17 +2,9 @@ FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y zsh
-
-SHELL ["/bin/zsh", "-c"]
-RUN apt-get install -y \
-        pocl-opencl-icd \
-        ocl-icd-opencl-dev \
-        clinfo \
+RUN apt-get update && \
+    apt-get install -y zsh \
         clang \
-        python3 \
-        python3-pip \
-        python3-venv \
         cmake \
         git \
         python3-full \
@@ -23,6 +15,7 @@ RUN apt-get install -y \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+SHELL ["/bin/zsh", "-c"]
 RUN python3 -m venv .venv && \
     source .venv/bin/activate && \
     pip install --no-cache-dir conan
