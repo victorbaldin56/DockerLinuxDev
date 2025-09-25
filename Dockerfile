@@ -14,9 +14,11 @@ RUN apt-get update && \
         lldb \
         valgrind \
         pkg-config \
-        gcc-riscv64-unknown-elf && \
+        gcc-riscv64-unknown-elf \
+        clangd-12 && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
 
 RUN python3 -m venv .venv && \
     source .venv/bin/activate && \
