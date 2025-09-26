@@ -15,7 +15,7 @@ RUN apt-get update && \
         valgrind \
         pkg-config \
         gcc-riscv64-unknown-elf \
-        clangd-12 && \
+        clangd-8 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
