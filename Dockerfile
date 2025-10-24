@@ -21,8 +21,7 @@ RUN apt-get update && \
         gcc-riscv64-unknown-elf \
         clangd \
         clang-format && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m venv /opt/venv && \
     /opt/venv/bin/pip install --no-cache-dir --upgrade pip && \
@@ -31,14 +30,17 @@ RUN python3 -m venv /opt/venv && \
 ARG USER=dev
 ARG UID=1000
 ARG GID=1000
+
 RUN groupadd -g ${GID} ${USER} || true && \
     useradd -m -u ${UID} -g ${GID} -s /bin/zsh ${USER} || true
 
-WORKDIR /home/${USER}/app
+RUN mkdir -p /home/${USER} && \
+    chown -R ${UID}:${GID} /opt/venv /home/${USER}
 
-COPY . .
-
-RUN chown -R ${USER} /opt/venv /home/${USER}/app
+RUN printf '\n# Auto-activate system venv if present\nif [ -f /opt/venv/bin/activate ]; then\n  source /opt/venv/bin/activate\nfi\n' >> /home/${USER}/.zshrc && \
+    chown ${UID}:${GID} /home/${USER}/.zshrc
 
 USER ${USER}
-CMD ["bash", "-lc", "source /opt/venv/bin/activate && exec zsh -l"]
+ENV HOME=/home/${USER}
+
+CMD ["zsh", "-l"]
