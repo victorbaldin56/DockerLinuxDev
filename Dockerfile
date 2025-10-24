@@ -1,10 +1,14 @@
 FROM ubuntu:24.04
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive \
+    PATH=/opt/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    SHELL=/bin/bash
 
 SHELL ["/bin/bash", "-c"]
+
 RUN apt-get update && \
-    apt-get install -y zsh \
+    apt-get install -y --no-install-recommends \
+        zsh \
         clang \
         cmake \
         git \
@@ -20,10 +24,21 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m venv .venv && \
-    source .venv/bin/activate && \
-    pip install --no-cache-dir conan
+RUN python3 -m venv /opt/venv && \
+    /opt/venv/bin/pip install --no-cache-dir --upgrade pip && \
+    /opt/venv/bin/pip install --no-cache-dir conan
 
-WORKDIR /app
-COPY . .
-CMD zsh && source .venv/bin/activate
+ARG USER=dev
+ARG UID=1000
+ARG GID=1000
+RUN groupadd -g ${GID} ${USER} || true && \
+    useradd -m -u ${UID} -g ${GID} -s /bin/zsh ${USER} || true
+
+WORKDIR /home/${USER}/app
+
+COPY --chown=${USER}:${USER} . .
+
+RUN chown -R ${USER}:${USER} /opt/venv /home/${USER}/app
+
+USER ${USER}
+CMD ["bash", "-lc", "source /opt/venv/bin/activate && exec zsh -l"]
