@@ -10,6 +10,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         zsh \
         clang \
+        clang-tools \
+        make \
         cmake \
         git \
         python3 \
@@ -22,6 +24,14 @@ RUN apt-get update && \
         clangd \
         clang-format && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && \
+    update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100 && \
+    update-alternatives --set cc /usr/bin/clang && \
+    update-alternatives --set c++ /usr/bin/clang++
+
+ENV CC=/usr/bin/clang \
+    CXX=/usr/bin/clang++
 
 RUN python3 -m venv /opt/venv && \
     /opt/venv/bin/pip install --no-cache-dir --upgrade pip && \
