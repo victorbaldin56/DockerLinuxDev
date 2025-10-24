@@ -36,7 +36,7 @@ RUN groupadd -g ${GID} ${USER} || true && \
 
 WORKDIR /home/${USER}/app
 
-COPY --chown=${USER}
+COPY --chown=${USER} . .
 
 RUN chown -R ${USER} /opt/venv /home/${USER}/app
 
