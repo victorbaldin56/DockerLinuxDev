@@ -15,7 +15,8 @@ RUN apt-get update && \
         valgrind \
         pkg-config \
         gcc-riscv64-unknown-elf \
-        clangd && \
+        clangd \
+        clang-format && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
