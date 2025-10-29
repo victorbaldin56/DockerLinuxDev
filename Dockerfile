@@ -23,7 +23,8 @@ RUN apt-get update && \
         pkg-config \
         gcc-riscv64-unknown-elf \
         clangd \
-        clang-format && \
+        clang-format \
+        build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && \
