@@ -24,7 +24,8 @@ RUN apt-get update && \
         gcc-riscv64-unknown-elf \
         clangd \
         clang-format \
-        build-essential && \
+        build-essential \
+        libasan && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && \
