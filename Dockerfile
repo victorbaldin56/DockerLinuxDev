@@ -25,7 +25,7 @@ RUN apt-get update && \
         clangd \
         clang-format \
         build-essential \
-        libasan && \
+        libasan8 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && \
