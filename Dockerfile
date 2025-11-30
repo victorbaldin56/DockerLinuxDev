@@ -31,8 +31,6 @@ RUN apt-get update && \
         graphviz && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
-
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && \
     update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100 && \
     update-alternatives --set cc /usr/bin/clang && \
@@ -56,5 +54,7 @@ RUN printf '\n# Auto-activate system venv if present\nif [ -f /opt/venv/bin/acti
 
 USER ${USER}
 ENV HOME=/home/${USER}
+
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 CMD ["zsh", "-l"]
