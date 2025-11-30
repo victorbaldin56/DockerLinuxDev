@@ -8,6 +8,7 @@ SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        wget \
         openssh-client \
         zsh \
         clang \
