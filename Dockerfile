@@ -26,8 +26,11 @@ RUN apt-get update && \
         clang-format \
         build-essential \
         libasan8 \
-        libclang-rt-18-dev && \
+        libclang-rt-18-dev \
+        graphviz && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && \
     update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100 && \
