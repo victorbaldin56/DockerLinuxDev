@@ -50,11 +50,10 @@ RUN useradd -m -s /bin/zsh ${USER}
 RUN mkdir -p /home/${USER} && \
     chown -R ${USER} /opt/venv /home/${USER}
 
-RUN printf '\n# Auto-activate system venv if present\nif [ -f /opt/venv/bin/activate ]; then\n  source /opt/venv/bin/activate\nfi\n' >> /home/${USER}/.zshrc
-
 USER ${USER}
 ENV HOME=/home/${USER}
 
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+RUN printf '\n# Auto-activate system venv if present\nif [ -f /opt/venv/bin/activate ]; then\n  source /opt/venv/bin/activate\nfi\n' >> ~/.zshrc
 
-CMD ["zsh", "-l"]
+ENTRYPOINT [ "/bin/zsh" ]
