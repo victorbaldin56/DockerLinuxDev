@@ -53,7 +53,8 @@ RUN mkdir -p /home/${USER} && \
 USER ${USER}
 ENV HOME=/home/${USER}
 
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
-RUN printf '\n# Auto-activate system venv if present\nif [ -f /opt/venv/bin/activate ]; then\n  source /opt/venv/bin/activate\nfi\n' >> ~/.zshrc
+RUN git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /home/${USER}/.oh-my-zsh && \
+    cp /home/${USER}/.oh-my-zsh/templates/zshrc.zsh-template /home/${USER}/.zshrc
+RUN printf '\n# Auto-activate system venv if present\nif [ -f /opt/venv/bin/activate ]; then\n  source /opt/venv/bin/activate\nfi\n' >> /home/${USER}/.zshrc
 
-ENTRYPOINT [ "/bin/zsh" ]
+ENTRYPOINT [ "/bin/zsh", "-l" ]
