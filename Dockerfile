@@ -33,7 +33,6 @@ RUN apt-get update && \
         libasan8 \
         libclang-rt-18-dev \
         graphviz \
-        graphviz-lib \
         libgraphviz-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
