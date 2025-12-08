@@ -34,7 +34,9 @@ RUN apt-get update && \
         libclang-rt-18-dev \
         graphviz \
         libgraphviz-dev \
-        linux-tools-generic && \
+        linux-tools-generic \
+        linux-tools-6.10.14-linuxkit \
+        linux-cloud-tools-6.10.14-linuxkit && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && \
