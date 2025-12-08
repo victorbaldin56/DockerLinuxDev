@@ -33,7 +33,8 @@ RUN apt-get update && \
         libasan8 \
         libclang-rt-18-dev \
         graphviz \
-        libgraphviz-dev && \
+        libgraphviz-dev \
+        linux-tools-generic && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100 && \
